@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\requests\categories\CreateCategoryRequest;
+use App\Http\requests\categories\UpdateCategoriesRequest;
+use App\Category;
+
+use Illuminate\Validation\Rules\Unique;
 
 class CategoriesController extends Controller
 {
@@ -13,7 +18,7 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        return view('categories.index');
+        return view('categories.index')->with('categories', Category::all());
     }
 
     /**
@@ -32,9 +37,16 @@ class CategoriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateCategoryRequest $request)
     {
-        //
+   
+      Category::create([
+          'name'=> $request ->name
+      ]);
+
+      session()->flash('success', 'Category create successfully.');
+
+      return redirect(route('categories.index'));
     }
 
     /**
@@ -54,9 +66,10 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        //
+        return view('categories.create')->with('category', $category);
+
     }
 
     /**
@@ -66,9 +79,15 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateCategoriesRequest $request, Category $category)
     {
-        //
+        $category -> name =  $request-> name;
+        $category->save();
+
+        session()->flash('success', 'Category updated successfully.');
+
+        return redirect(route('categories.index'));
+
     }
 
     /**
