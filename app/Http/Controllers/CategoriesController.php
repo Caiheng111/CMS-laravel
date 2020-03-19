@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\requests\categories\CreateCategoryRequest;
-use App\Http\requests\categories\UpdateCategoriesRequest;
+use App\Http\Requests\Categories\CreateCategoryRequest;
+use App\Http\Requests\Categories\UpdateCategoriesRequest;
 use App\Category;
 
 use Illuminate\Validation\Rules\Unique;
@@ -81,7 +81,7 @@ class CategoriesController extends Controller
      */
     public function update(UpdateCategoriesRequest $request, Category $category)
     {
-        $category -> name =  $request-> name;
+        $category -> name = $request-> name;
         $category->save();
 
         session()->flash('success', 'Category updated successfully.');
@@ -98,6 +98,6 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
     }
 }
