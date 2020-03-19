@@ -37,8 +37,8 @@
     <div class="modal fade" id="deleteModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
        <form action="" method="POST" id="deleteCategoryForm">
-         @csIf
-         @method('DELETE')
+         @csrf
+         @method("delete")
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="deleteModalLabel">Delete category</h5>
@@ -48,13 +48,13 @@
           </div>
           <div class="modal-body">
             <p class="text-center text-blod">
-              Are you sure you want yo delete?
+              Are you sure you want to delete?
             </p>
             
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">No,Go Back</button>
-            <button type="button" class="btn btn-primary">Yes,Delete </button>
+            <button type="submit" class="btn btn-danger">Yes,Delete </button>
           </div>
         </div>
        </form>
@@ -70,11 +70,11 @@
 
   <script>
     function handleDelete(id){
-
     var form =document.getElementById('deleteCategoryForm');
     form.action = '/categories/' + id
       $('#deleteModal').modal('show')
     }
 
+    
   </script>  
 @endsection
