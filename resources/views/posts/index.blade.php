@@ -7,4 +7,4 @@
 
   <div class="card card-default"></div>
 
-  @endsection
+@endsection
