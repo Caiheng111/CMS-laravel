@@ -41,15 +41,15 @@ class PostsController extends Controller
         // upload the image
         // dd($request->image)->store('posts');
 
-        $image = $request->image->store('posts');
+        // $image = $request->image->store('posts');
 
         // dd($request ->image);
         
         Post::create([
             'title' => $request->title,
             'description' => $request->description,
-            'contents' => $request->contents,
-            'image' => $image
+            'content' => $request->content,
+            'image' => $request->image
         ]);
 
 
