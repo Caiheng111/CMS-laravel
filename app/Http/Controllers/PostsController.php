@@ -39,24 +39,25 @@ class PostsController extends Controller
     public function store(CreatePostsRequest $request)
     {
         // upload the image
-        // dd($request->image)->store('posts');
+        // dd($request->image->store('posts'));
+        //view the post image in store folder
+         // dd($request ->image);
+        $image = $request->image->store('posts');
 
-        // $image = $request->image->store('posts');
-
-        // dd($request ->image);
-        
+    
         Post::create([
             'title' => $request->title,
             'description' => $request->description,
             'content' => $request->content,
-            'image' => $request->image
+            'image' => $image
         ]);
-
 
         session()->flash('success', 'Post create successfully.');
 
         return redirect(route('posts.index'));
     }
+
+
 
     /**
      * Display the specified resource.
